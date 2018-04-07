@@ -1,0 +1,16 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "FP Booking（く）", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li> <%= link_to raw('<span class="glyphicon glyphicon-user"></span>
+                ログイン'),
+                '#' %></li>
+        <li><%= link_to image_tag("GitHub-Mark-Light-32px",
+                        alt: "GitHub Mark",
+                        width: 24),
+                'https://github.com/naraba/fpbooking' %></li>
+      </ul>
+    </nav>
+  </div>
+</header>
