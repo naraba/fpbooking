@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < Devise::SessionsController
+class Fps::SessionsController < Devise::SessionsController
   include CrossVisit
   before_action :configure_sign_in_params, only: [:create]
-  before_action :check_fp_signed, only: [:create]
+  before_action :check_user_signed, only: [:create]
 
   # GET /resource/sign_in
   # def new

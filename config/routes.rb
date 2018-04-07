@@ -5,4 +5,8 @@ Rails.application.routes.draw do
     sessions:       'users/sessions',
     registrations:  'users/registrations'
   }
+  devise_for :fps, controllers: {
+    sessions:       'fps/sessions',
+    registrations:  'fps/registrations'
+  }
 end

@@ -50,5 +50,15 @@ class UsersEditAndCancelTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'static_pages/home'
     assert_equal 1, flash.count
+
+    # cancel
+    assert_difference 'User.count', -1 do
+      delete user_registration_path
+    end
+    assert_equal 1, flash.count
+    follow_redirect!
+    assert_template 'static_pages/home'
+    assert_select "a[href=?]", new_user_session_path
+    assert_select "a[href=?]", destroy_user_session_path, count: 0
   end
 end

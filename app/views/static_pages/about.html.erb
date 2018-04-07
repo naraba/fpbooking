@@ -2,5 +2,9 @@
 <h1>このサイトについて</h1>
 <p>
 Ruby on Railsのお勉強。<br>
-FPの<%= link_to "登録", '#' %>・<%= link_to "ログイン", '#' %>。
+
+<% if not user_signed_in? %>
+FPの<%= link_to "登録", new_fp_registration_path %>・
+    <%= link_to "ログイン", new_fp_session_path %>。
+<% end %>
 </p>
