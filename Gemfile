@@ -10,6 +10,9 @@ end
 gem 'rails', '~> 5.1.5'
 
 gem 'bootstrap-sass', '3.3.7'
+gem 'devise', '~> 4.4.3'
+gem 'devise-i18n'
+
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
