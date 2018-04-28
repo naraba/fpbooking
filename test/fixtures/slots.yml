@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+slot1:
+  start_time: 2018-04-28 13:00:00
+  end_time: 2018-04-28 13:30:00
+  fp: fp1
+  user: user1
+
+slot2:
+  start_time: 2018-04-29 13:00:00
+  end_time: 2018-04-29 13:30:00
+  fp: fp2
+  user: user2
+
+earliest:
+  start_time: 2018-04-27 13:00:00
+  end_time: 2018-04-27 13:30:00
+  fp: fp1
+  user: user1
+
+latest:
+  start_time: 2018-04-30 13:00:00
+  end_time: 2018-04-30 13:30:00
+  fp: fp2
+  user: user2

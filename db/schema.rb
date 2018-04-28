@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180407134959) do
+ActiveRecord::Schema.define(version: 20180428113401) do
 
   create_table "fps", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20180407134959) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_fps_on_email", unique: true
     t.index ["reset_password_token"], name: "index_fps_on_reset_password_token", unique: true
+  end
+
+  create_table "slots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.bigint "fp_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fp_id", "start_time"], name: "index_slots_on_fp_id_and_start_time"
+    t.index ["fp_id"], name: "index_slots_on_fp_id"
+    t.index ["user_id", "start_time"], name: "index_slots_on_user_id_and_start_time"
+    t.index ["user_id"], name: "index_slots_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -46,4 +59,6 @@ ActiveRecord::Schema.define(version: 20180407134959) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "slots", "fps"
+  add_foreign_key "slots", "users"
 end

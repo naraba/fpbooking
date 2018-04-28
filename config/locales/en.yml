@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  errors:
+    messages:
+      prior_to_start: "should be after start time"

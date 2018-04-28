@@ -2,10 +2,24 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(email: "user@example.com")
+    @fp = Fp.new(email: "fp@example.com",
+                 password: "foobar",
+                 password_confirmation: "foobar")
+    @user = User.new(email: "user@example.com",
+                     password: "foobar",
+                     password_confirmation: "foobar")
   end
 
-  test "xxx" do
-
+  test "associated slots should be nullified" do
+    @fp.save
+    @user.save
+    slot = @fp.slots.create!(start_time: DateTime.now,
+                             end_time: DateTime.now + Rational(1, 24),
+                             user_id: @user.id)
+    assert_equal slot.user_id, @user.id
+    assert_difference 'Slot.count', 0 do
+      @user.destroy
+    end
+    assert_nil slot.reload.user_id
   end
 end
