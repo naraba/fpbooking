@@ -71,7 +71,7 @@ ja:
         cancel_my_account: '退会'
         leave_blank_if_you_don_t_want_to_change_it: '変更しない場合は空欄にしてください'
         title: 'アカウント情報編集'
-        unhappy: '遺憾です'
+        unhappy: '退会すると予約に関するデータも削除されます'
         update: '変更の保存'
         we_need_your_current_password_to_confirm_your_changes: '変更には現在のパスワード入力が必要です'
       new:

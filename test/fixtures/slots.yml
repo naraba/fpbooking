@@ -12,14 +12,51 @@ slot2:
   fp: fp2
   user: user2
 
+slot3:
+  start_time: 2018-04-29 14:00:00
+  end_time: 2018-04-29 14:30:00
+  fp: fp1
+
+slot4:
+  start_time: 2018-04-29 14:30:00
+  end_time: 2018-04-29 15:00:00
+  fp: fp1
+
 earliest:
   start_time: 2018-04-27 13:00:00
   end_time: 2018-04-27 13:30:00
   fp: fp1
   user: user1
 
-latest:
-  start_time: 2018-04-30 13:00:00
-  end_time: 2018-04-30 13:30:00
+<% today = Time.now.utc.change(sec: 0) %>
+today:
+  start_time: <%= today.change(hour: 17, min: 30).strftime("%Y-%m-%d %H:%M:%S") %>
+  end_time: <%= today.change(hour: 18, min: 0).strftime("%Y-%m-%d %H:%M:%S") %>
+  fp: fp1
+
+<% later = (Time.now.utc + 3.day).change(sec: 0) %>
+double1:
+  start_time: <%= later.change(hour: 17, min: 0).strftime("%Y-%m-%d %H:%M:%S") %>
+  end_time: <%= later.change(hour: 17, min: 30).strftime("%Y-%m-%d %H:%M:%S") %>
+  fp: fp1
+
+double2:
+  start_time: <%= later.change(hour: 17, min: 0).strftime("%Y-%m-%d %H:%M:%S") %>
+  end_time: <%= later.change(hour: 17, min: 30).strftime("%Y-%m-%d %H:%M:%S") %>
   fp: fp2
-  user: user2
+
+triple1:
+  start_time: <%= later.change(hour: 17, min: 30).strftime("%Y-%m-%d %H:%M:%S") %>
+  end_time: <%= later.change(hour: 18, min: 0).strftime("%Y-%m-%d %H:%M:%S") %>
+  fp: fp1
+  user: user1
+
+triple2:
+  start_time: <%= later.change(hour: 17, min: 30).strftime("%Y-%m-%d %H:%M:%S") %>
+  end_time: <%= later.change(hour: 18, min: 0).strftime("%Y-%m-%d %H:%M:%S") %>
+  fp: fp2
+
+triple3:
+  start_time: <%= later.change(hour: 17, min: 30).strftime("%Y-%m-%d %H:%M:%S") %>
+  end_time: <%= later.change(hour: 18, min: 0).strftime("%Y-%m-%d %H:%M:%S") %>
+  fp: fp3

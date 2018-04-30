@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
     @fp.save
     @user.save
     slot = @fp.slots.create!(start_time: DateTime.now,
-                             end_time: DateTime.now + Rational(1, 24),
+                             end_time: DateTime.now + 30.minutes,
                              user_id: @user.id)
     assert_equal slot.user_id, @user.id
     assert_difference 'Slot.count', 0 do

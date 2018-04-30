@@ -5,12 +5,14 @@ class Slot < ApplicationRecord
   validates :fp_id, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
-  validate :start_should_be_prior_to_end
+  validate :slot_duration_should_be_30min
 
   private
-    def start_should_be_prior_to_end
-        if start_time.present? && end_time.present? && start_time >= end_time
-          errors.add(:end_time, :prior_to_start)
-        end
+    def slot_duration_should_be_30min
+      if start_time.present? && end_time.present? &&
+        end_time - start_time != 30.minutes
+        errors.add(:end_time, :slot_duration_invalid)
+      end
     end
+
 end

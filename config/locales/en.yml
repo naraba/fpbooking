@@ -33,4 +33,15 @@ en:
   hello: "Hello world"
   errors:
     messages:
-      prior_to_start: "should be after start time"
+      slot_duration_invalid: "slot duration should be 30 minutes"
+  slots:
+    create:
+      double_opened: "already opened for this timespot"
+      open_slot_after_today: "cannot open a slot before tomorrow"
+      open_slot_business_hour: "cannot open a slot outside office hours"
+      open_slot_timeunits: "register slots in 30 minutes"
+      opened_slot: "opened slot"
+    update:
+      book_slot_after_today: "cannot book a slot before tomorrow"
+      booked_slot: "booked slot"
+      double_booking: "already booked for this timespot"

@@ -15,7 +15,7 @@ class CrossVisitTest < ActionDispatch::IntegrationTest
     post user_session_path, params: { user: { email: @user.email,
                                               password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_match "フィナンシャルプランナーとしてログイン中です", response.body
   end
 
@@ -27,7 +27,7 @@ class CrossVisitTest < ActionDispatch::IntegrationTest
                                            password: "password",
                                            password_confirmation: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_match "フィナンシャルプランナーとしてログイン中です", response.body
   end
 
@@ -38,7 +38,7 @@ class CrossVisitTest < ActionDispatch::IntegrationTest
     post fp_session_path, params: { fp: { email: @fp.email,
                                           password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_match "ユーザとしてログイン中です", response.body
   end
 
@@ -50,7 +50,7 @@ class CrossVisitTest < ActionDispatch::IntegrationTest
                                          password: "password",
                                          password_confirmation: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_match "ユーザとしてログイン中です", response.body
   end
 end

@@ -127,12 +127,12 @@ ja:
       not_an_integer: は整数で入力してください
       odd: は奇数にしてください
       required: を入力してください
+      slot_duration_invalid: 予約枠の長さは30分としてください
       taken: はすでに存在します
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
       other_than: は%{count}以外の値にしてください
-      prior_to_start: は開始時刻より後にしてください
     template:
       body: 次の項目を確認してください
       header:
@@ -191,6 +191,17 @@ ja:
     precision:
       format:
         delimiter: ''
+  slots:
+    create:
+      double_opened: すでに同時間帯に枠を登録しています
+      open_slot_after_today: 予約枠を登録できるのは明日以降の日時です
+      open_slot_business_hour: 予約枠を登録できるのは営業時間内の日時です
+      open_slot_timeunits: 予約枠は30分単位でないと登録できません
+      opened_slot: 予約枠を登録しました
+    update:
+      book_slot_after_today: 予約できるのは明日以降の枠です
+      booked_slot: 予約しました
+      double_booking: すでに同時間帯に予約をされています
   support:
     array:
       last_word_connector: 、

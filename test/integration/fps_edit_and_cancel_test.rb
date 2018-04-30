@@ -18,7 +18,7 @@ class FpsEditAndCancelTest < ActionDispatch::IntegrationTest
     post fp_session_path, params: { fp: { email: @fp.email,
                                           password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
 
     # edit
     get edit_fp_registration_path
@@ -38,7 +38,7 @@ class FpsEditAndCancelTest < ActionDispatch::IntegrationTest
     post fp_session_path, params: { fp: { email: @fp.email,
                                           password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
 
     # edit
     get edit_fp_registration_path
@@ -48,7 +48,7 @@ class FpsEditAndCancelTest < ActionDispatch::IntegrationTest
                                                 password_confirmation: "password2",
                                                 current_password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_equal 1, flash.count
 
     # cancel

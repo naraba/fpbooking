@@ -5,11 +5,15 @@ class SlotTest < ActiveSupport::TestCase
     @fp = fps(:fp1)
     @user = users(:user1)
     @slot = @fp.slots.new(start_time: DateTime.now,
-                            end_time: DateTime.now + Rational(1, 24))
+                            end_time: DateTime.now + 30.minutes)
   end
 
   test "should be valid" do
     assert @slot.valid?
+  end
+
+  test "order should be earliest first" do
+    assert_equal slots(:earliest), Slot.first
   end
 
   test "fp id should be present" do
@@ -32,19 +36,18 @@ class SlotTest < ActiveSupport::TestCase
     assert_not @slot.valid?
   end
 
-  test "start time should be prior to end time" do
+  test "slot duration should be 30min" do
     @slot.start_time = DateTime.now
     @slot.end_time = DateTime.now
     assert_not @slot.valid?
 
-    @slot.end_time = @slot.start_time - 1
+    @slot.end_time = @slot.start_time + 31.minutes
     assert_not @slot.valid?
 
-    @slot.end_time = @slot.start_time + 1
-    assert @slot.valid?
-  end
+    @slot.end_time = @slot.start_time - 30.minutes
+    assert_not @slot.valid?
 
-  test "order should be earliest first" do
-    assert_equal slots(:earliest), Slot.first
+    @slot.end_time = @slot.start_time + 30.minutes
+    assert @slot.valid?
   end
 end

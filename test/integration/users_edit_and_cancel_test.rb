@@ -18,7 +18,7 @@ class UsersEditAndCancelTest < ActionDispatch::IntegrationTest
     post user_session_path, params: { user: { email: @user.email,
                                               password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
 
     # edit
     get edit_user_registration_path
@@ -31,14 +31,14 @@ class UsersEditAndCancelTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
   end
 
-  test "signin and edit with valid information folllowed by cancel" do
+  test "signin and edit with valid information followed by cancel" do
     # signin
     get new_user_session_path
     assert_template 'users/sessions/new'
     post user_session_path, params: { user: { email: @user.email,
                                               password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
 
     # edit
     get edit_user_registration_path
@@ -48,7 +48,7 @@ class UsersEditAndCancelTest < ActionDispatch::IntegrationTest
                                                     password_confirmation: "password2",
                                                     current_password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_equal 1, flash.count
 
     # cancel

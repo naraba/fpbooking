@@ -9,4 +9,7 @@ Rails.application.routes.draw do
     sessions:       'fps/sessions',
     registrations:  'fps/registrations'
   }
+  get 'slots', to: 'slots#index'
+  post 'slots/create', to: 'slots#create'
+  post 'slots/update', to: 'slots#update'
 end

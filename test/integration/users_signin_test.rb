@@ -21,10 +21,11 @@ class UsersSigninTest < ActionDispatch::IntegrationTest
     post user_session_path, params: { user: { email: @user.email,
                                                      password: "password" } }
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_equal 1, flash.count
     get root_path
     assert flash.empty?
+    follow_redirect!
     assert_select "a[href=?]", edit_user_registration_path
     assert_select "a[href=?]", new_user_session_path, count: 0
     assert_select "a[href=?]", destroy_user_session_path

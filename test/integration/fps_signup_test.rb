@@ -23,7 +23,7 @@ class FpsSignupTest < ActionDispatch::IntegrationTest
     end
     assert_equal 1, flash.count
     follow_redirect!
-    assert_template 'static_pages/home'
+    assert_template 'slots/index'
     assert_select "a[href=?]", new_fp_session_path, count: 0
     assert_select "a[href=?]", destroy_fp_session_path
   end

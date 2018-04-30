@@ -10,3 +10,6 @@ fp1:
 fp2:
   email: fp2@example.com
   encrypted_password: <%= Devise::Encryptor.digest(Fp, 'password') %>
+fp3:
+  email: fp3@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(Fp, 'password') %>
