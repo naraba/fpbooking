@@ -21,25 +21,26 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
     @mon1300 = stime
   end
 
-  test "should redirect index in when not signed in" do
+  test "should redirect index when not signed in" do
     get slots_path
     assert_redirected_to new_user_session_path
   end
 
-  test "should redirect create in when not signed in" do
+  test "should redirect create when not signed in" do
     post slots_create_path, params: @monday_params
     assert_redirected_to new_user_session_path
   end
 
-  test "should redirect update in when not signed in" do
+  test "should redirect update when not signed in" do
     post slots_update_path, params: @monday_params
     assert_redirected_to new_user_session_path
   end
 
-  test "get index when signed in as fp" do
+  test "get index when signed in as fp including his recent slots" do
     sign_in(@fp)
     get slots_path
     assert_template 'slots/index'
+    assert_select ".recent-slots > tr", count: 2 # th and 1 td
   end
 
   test "get index as json when signed in as fp" do
@@ -48,10 +49,11 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 7, JSON.parse(response.body).length
   end
 
-  test "get index when signed in as user" do
+  test "get index when signed in as user including his recent slots" do
     sign_in(@user)
     get slots_path
     assert_template 'slots/index'
+    assert_select ".recent-slots > tr", count: 2 # th and 1 td
   end
 
   test "get index as json when signed in as user" do
@@ -284,4 +286,25 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
     assert_nil @today_slot.reload.user_id
     assert_not_nil flash.now[:danger]
   end
+
+  test "should redirect reder_user_recent when not signed in" do
+    get slots_render_user_recent_path
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should redirect reder_user_recent when signed in as fp" do
+    sign_in(@fp)
+
+    get slots_render_user_recent_path
+    assert_redirected_to slots_path
+  end
+
+  test "should render recent when signed in as user" do
+    sign_in(@user)
+
+    get slots_render_user_recent_path
+    assert_template 'slots/_recent'
+    assert_select ".recent-slots > tr", count: 2 # th and 1 td
+  end
+
 end

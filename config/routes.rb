@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get 'slots', to: 'slots#index'
   post 'slots/create', to: 'slots#create'
   post 'slots/update', to: 'slots#update'
+  get 'slots/render_user_recent', to: 'slots#render_user_recent'
 end

@@ -20,6 +20,15 @@
 
 $(document).on('turbolinks:load', function() {
 
+  set_alert = function(data) {
+    if ( $('.alert')[0] ) {
+      $('.alert').remove();
+      $('.container').eq(1).prepend(data);
+    } else {
+      $('.container').eq(1).prepend(data);
+    }
+  };
+
   open_slot = function(start, end) {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
       var token;
@@ -41,10 +50,10 @@ $(document).on('turbolinks:load', function() {
       alert("予約枠を登録しました");
       $('#calendar').fullCalendar('removeEvents');
       $('#calendar').fullCalendar('refetchEvents');
-      $('.alert').html(data);
+      set_alert(data);
     }).fail(function(data) {
       alert("予約枠の登録に失敗しました");
-      $('.alert').html(data.responseText);
+      set_alert(data.responseText);
     });
   };
 
@@ -69,10 +78,11 @@ $(document).on('turbolinks:load', function() {
       alert("予約しました");
       $('#calendar').fullCalendar('removeEvents');
       $('#calendar').fullCalendar('refetchEvents');
-      $('.alert').html(data);
+      set_alert(data);
+      $('.recent-slots').load('/slots/render_user_recent');
     }).fail(function(data) {
       alert("予約に失敗しました");
-      $('.alert').html(data.responseText);
+      set_alert(data.responseText);
     });
   };
 

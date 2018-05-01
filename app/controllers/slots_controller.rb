@@ -6,6 +6,7 @@ class SlotsController < ApplicationController
 
   def index
     gon.fp_signed_in = fp_signed_in?
+    gon.user_signed_in = user_signed_in?
 
     if fp_signed_in?
       booked = current_fp.slots.where.not(user_id: nil)
@@ -25,6 +26,8 @@ class SlotsController < ApplicationController
 
       @events = booked.to_a.concat(opens.to_a)
     end
+
+    @recent_slots = get_recent_slots
 
     respond_to do |format|
       format.html
@@ -101,6 +104,16 @@ class SlotsController < ApplicationController
     end
   end
 
+  def render_user_recent
+    if user_signed_in?
+      @recent_slots = get_recent_slots
+      render partial: "slots/recent"
+    else
+      # no need for fp because fp himself does not update his slots
+      redirect_to action: :index
+    end
+  end
+
   def destory
   end
 
@@ -138,5 +151,18 @@ class SlotsController < ApplicationController
       return false if sdat.nil? or edat.nil?
       valid_mins = [0, 30]
       return (sdat.min.in?(valid_mins) and edat.min.in?(valid_mins))
+    end
+
+    def get_recent_slots
+      # ugly patch(adding 9hours) for timezone gap
+      if fp_signed_in?
+        current_fp.users.includes(:slots)
+          .limit(10).select(:start_time, :email)
+          .where("start_time > ?", Time.now + 9.hour).to_a
+      elsif user_signed_in?
+        current_user.fps.includes(:slots)
+          .limit(10).select(:start_time, :email)
+          .where("start_time > ?", Time.now + 9.hour).to_a
+      end
     end
 end
