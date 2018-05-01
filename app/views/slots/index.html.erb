@@ -1,6 +1,8 @@
 <% provide(:title, "予約ページ") %>
-<div class="center jumbotron">
-  <h1>予約ページ</h1>
-  <div id="calendar"></div>
-  <%= render 'slots/recent' %>
+<%= render 'slots/commentary' %>
+<div class="row">
+  <div class="col-md-8" id="calendar"></div>
+  <div class="col-md-4">
+    <%= render 'slots/recent' %>
+  </div>
 </div>

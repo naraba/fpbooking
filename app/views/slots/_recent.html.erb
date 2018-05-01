@@ -1,12 +1,15 @@
-<table class="recent-slots">
-  <tr>
-    <th>開始日時</th>
-    <th><%= fp_signed_in? ? "お客様" : "担当フィナンシャルプランナー" %></th>
-  </tr>
-  <% @recent_slots.each do |slot| %>
+<div class="recent-slots">
+  <h3>直近の<%= fp_signed_in? ? "お客様" : "ご予約" %></h3>
+  <table class="table table-striped">
     <tr>
-      <td><%= slot.start_time.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[slot.start_time.wday]}) %H:%M") %></td>
-      <td><%= slot.email %></td>
+      <th>開始日時</th>
+      <th><%= fp_signed_in? ? "お客様" : "担当FP" %></th>
     </tr>
-  <% end %>
-</table>
+    <% @recent_slots.each do |slot| %>
+      <tr>
+        <td><%= slot.start_time.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[slot.start_time.wday]}) %H:%M") %></td>
+        <td><%= slot.email %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

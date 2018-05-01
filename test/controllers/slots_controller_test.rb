@@ -40,26 +40,26 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@fp)
     get slots_path
     assert_template 'slots/index'
-    assert_select ".recent-slots > tr", count: 2 # th and 1 td
+    assert_select ".recent-slots > table > tr", count: 2 # th and 1 td
   end
 
   test "get index as json when signed in as fp" do
     sign_in(@fp)
     get '/slots.json'
-    assert_equal 7, JSON.parse(response.body).length
+    assert_equal 3, JSON.parse(response.body).length
   end
 
   test "get index when signed in as user including his recent slots" do
     sign_in(@user)
     get slots_path
     assert_template 'slots/index'
-    assert_select ".recent-slots > tr", count: 2 # th and 1 td
+    assert_select ".recent-slots > table > tr", count: 2 # th and 1 td
   end
 
   test "get index as json when signed in as user" do
     sign_in(@user)
     get '/slots.json'
-    assert_equal 7, JSON.parse(response.body).length
+    assert_equal 3, JSON.parse(response.body).length
   end
 
   test "should not create slot when signed as user" do
@@ -304,7 +304,7 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
 
     get slots_render_user_recent_path
     assert_template 'slots/_recent'
-    assert_select ".recent-slots > tr", count: 2 # th and 1 td
+    assert_select ".recent-slots > table > tr", count: 2 # th and 1 td
   end
 
 end

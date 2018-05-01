@@ -123,7 +123,7 @@ $(document).on('turbolinks:load', function() {
 
     eventClick: function(calEvent, jsEvent, view) {
       if (!after_24hours(calEvent.start)) return;
-      if (!gon.fp_signed_in && "open" == calEvent.className) {
+      if (!gon.fp_signed_in && "open-slot" == calEvent.className) {
         if (confirm('予約しますか')) {
           book_slot(calEvent.start, calEvent.end);
         }

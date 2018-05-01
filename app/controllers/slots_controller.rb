@@ -8,21 +8,25 @@ class SlotsController < ApplicationController
     gon.fp_signed_in = fp_signed_in?
     gon.user_signed_in = user_signed_in?
 
+    # ugly patch(adding 9hours) for timezone gap
+    past = Time.now + 9.hour - 1.day
     if fp_signed_in?
-      booked = current_fp.slots.where.not(user_id: nil)
-        .select('start_time as start, end_time as end, "予約された枠" as title, "booked" as className')
-      opens = current_fp.slots.where(user_id: nil)
-        .select('start_time as start, end_time as end, "open" as className')
+      booked = current_fp.slots.where.not(user_id: nil).where("start_time > ?", past)
+        .select('start_time as start, end_time as end, "予約された枠" as title, "booked-slot" as className')
+      opens = current_fp.slots.where(user_id: nil).where("start_time > ?", past)
+        .select('start_time as start, end_time as end, "open-slot" as className')
 
       @events = booked.to_a.concat(opens.to_a)
     elsif user_signed_in?
       # booked slots
-      booked = current_user.slots.select('start_time as start, end_time as end, "あなたの予約" as title, "booked" as className')
+      booked = current_user.slots.where("start_time > ?", past)
+        .select('start_time as start, end_time as end, "あなたの予約" as title, "booked-slot" as className')
       timespots = booked.pluck(:start_time)
 
       # open slots group by start and end time except for the same timespots of booked slots
-      opens = Slot.where(user_id: nil).where.not(start_time: timespots).group(:start_time, :end_time)
-        .select('start_time as start, end_time as end, count(*) as title, "open" as className')
+      opens = Slot.where(user_id: nil).where("start_time > ?", past)
+        .where.not(start_time: timespots).group(:start_time, :end_time)
+        .select('start_time as start, end_time as end, count(*) as title, "open-slot" as className')
 
       @events = booked.to_a.concat(opens.to_a)
     end
