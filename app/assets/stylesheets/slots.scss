@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* fullcalendar */
+
 .fc-time-grid .fc-slats td {
   height: 2.0em;
 }
@@ -16,4 +18,19 @@
     color: #222;
     background-color: #f55;
   }
+}
+
+/* commentary list */
+
+.commentary ul {
+  background: #eee;
+  border-radius :4px;
+  box-shadow :0px 0px 1px gray;
+  padding: 0.5em 0.5em 0.5em 2em;
+}
+
+.commentary ul li {
+  font-size: 1.2em;
+  line-height: 0.5;
+  padding: 0.5em 0;
 }
