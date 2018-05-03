@@ -1,5 +1,21 @@
 version: '3'
+
 services:
+  https-portal:
+    image: steveltn/https-portal:1
+    volumes:
+      - cert-vol:/var/lib/https-portal
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - mynet
+    depends_on:
+      - web
+    environment:
+      STAGE: local
+      DOMAINS: 'example.com -> http://web'
+
   web:
     build:
       context: .
@@ -8,8 +24,6 @@ services:
       - tmp-vol:/shared/tmp
     networks:
       - mynet
-    ports:
-      - '80:80'
     depends_on:
       - app
     environment:
@@ -41,5 +55,6 @@ services:
 volumes:
   tmp-vol:
   db-vol:
+  cert-vol:
 networks:
   mynet:
