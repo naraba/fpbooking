@@ -1,5 +1,9 @@
 version: '3'
 services:
+  https-portal:
+    env_file:
+      - .env.development
+
   app:
     env_file:
       - .env.development
