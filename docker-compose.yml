@@ -18,32 +18,23 @@ services:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
-    env_file:
-      - ./environments/db.env
+    volumes:
+      - tmp-vol:/shared/tmp
     command: bundle exec puma -C config/puma.rb
     networks:
       - mynet
-    volumes:
-      - .:/myapp
-      - tmp-vol:/shared/tmp
     depends_on:
       - db
     environment:
       TZ: "Asia/Tokyo"
-    tty: true
-    stdin_open: true
   db:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    env_file:
-      - ./environments/db.env
     volumes:
       - db-vol:/var/lib/mysql
     networks:
       - mynet
-    ports:
-      - '3306:3306'
     environment:
       TZ: "Asia/Tokyo"
 

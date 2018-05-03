@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    env_file:
+      - .env.development
+    volumes:
+      - .:/myapp
+    tty: true
+    stdin_open: true
+  db:
+    env_file:
+      - .env.development
+    ports:
+      - '3306:3306'
