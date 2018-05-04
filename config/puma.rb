@@ -12,7 +12,6 @@ preload_app!
 bind "unix:///shared/tmp/sockets/puma.sock"
 
 # ログ出力ファイルの指定
-# TODO:Dockerfileに記載したディレクトリのmkdirがなぜか動かないのでそうでない場所で作っておく
 stdout_redirect "#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true
 
 # pidとstateファイルの格納
